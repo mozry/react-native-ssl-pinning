@@ -30,8 +30,10 @@ import okhttp3.CookieJar;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
+import okhttp3.Protocol;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.internal.Util;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
@@ -68,6 +70,7 @@ public class OkHttpUtils {
             }
 
             client = clientBuilder
+                    .protocols(Util.immutableList(Protocol.HTTP_1_1))
                     .cookieJar(cookieJar)
                     .sslSocketFactory(sslContext.getSocketFactory())
                     .build();
